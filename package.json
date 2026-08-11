@@ -1,0 +1,20 @@
+{
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "dev:jetson-orin-nano-version": "node scripts/dev_version.mjs jetson-orin-nano-version",
+    "dev:jetson-nano-version": "node scripts/dev_version.mjs jetson-nano-version",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "docs:stage-main": "node scripts/stage_main_site.mjs",
+    "build:jetson-orin-nano-version": "node scripts/build_version.mjs jetson-orin-nano-version",
+    "build:jetson-nano-version": "node scripts/build_version.mjs jetson-nano-version",
+    "build:all": "node scripts/build_version.mjs jetson-orin-nano-version && node scripts/build_version.mjs jetson-nano-version"
+  },
+  "dependencies": {
+    "vitepress": "^1.6.4"
+  },
+  "devDependencies": {
+    "markdown-it-mathjax3": "^4.3.2",
+    "sharp": "^0.34.5"
+  }
+}
