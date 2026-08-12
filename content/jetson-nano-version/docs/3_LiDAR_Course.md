@@ -43,7 +43,7 @@ Refer to the diagram below to understand the effect of LiDAR. The LiDAR emits li
 
 ## 3.3 LiDAR Obstacle Avoidance
 
-To understand the connection method for the app, please refer to **[1. ROSpider User Manual\1.3.3 App Installation and Connection](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/1_ROSpider_User_Manual.html#app-installation-and-connection)** for the relevant course.
+To understand the connection method for the app, please refer to **[1. ROSpider User Manual\1.3.3 App Installation and Connection](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/1_ROSpider_User_Manual.html#app-installation-and-connection)** for the relevant course.
 
 ### 3.3.1 Activation via App
 
@@ -58,7 +58,7 @@ To understand the connection method for the app, please refer to **[1. ROSpider 
 
 ### 3.3.2 Activation via Commands
 
-1. Start the robot and connect it to the remote control software NoMachine. For details on connecting to the remote desktop, refer to **[1. ROSpider User Manual\1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
+1. Start the robot and connect it to the remote control software NoMachine. For details on connecting to the remote desktop, refer to **[1. ROSpider User Manual\1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
 2. Click the icon <img src="../_static/media/chapter_3/section_1/media/image7.png"   /> on the system desktop to open the command line terminal.
 3. Enter the command to stop the auto-start service and press **Enter**.
 
@@ -98,7 +98,7 @@ During the use of the LiDAR obstacle avoidance function, the object to be detect
 
 ## 3.4 LiDAR Following
 
-To understand the connection method for the app, please refer to **[1. ROSpider User Manual\1.3.3 App Installation and Connection](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/1_ROSpider_User_Manual.html#app-installation-and-connection)** for the relevant course.
+To understand the connection method for the app, please refer to **[1. ROSpider User Manual\1.3.3 App Installation and Connection](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/1_ROSpider_User_Manual.html#app-installation-and-connection)** for the relevant course.
 
 ### 3.4.1 Activation via APP
 
@@ -113,7 +113,7 @@ To understand the connection method for the app, please refer to **[1. ROSpider 
 
 ### 3.4.2 Activation via Commands
 
-1. Start the robot and connect it to the remote control software NoMachine. For details on connecting to the remote desktop, refer to **[1. ROSpider User Manual\1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
+1. Start the robot and connect it to the remote control software NoMachine. For details on connecting to the remote desktop, refer to **[1. ROSpider User Manual\1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
 2. Click the icon <img src="../_static/media/chapter_3/section_1/media/image7.png"   /> on the system desktop to open the command line terminal.
 3. Enter the command to stop the auto-start service and press **Enter**.
 
@@ -153,7 +153,7 @@ During the use of the LiDAR following feature, the object to be detected must be
 
 ## 3.5 LiDAR Guarding
 
-To understand the connection method for the app, please refer to **[1. ROSpider User Manual\1.3.3 App Installation and Connection](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/1_ROSpider_User_Manual.html#app-installation-and-connection)** for the relevant course.
+To understand the connection method for the app, please refer to **[1. ROSpider User Manual\1.3.3 App Installation and Connection](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/1_ROSpider_User_Manual.html#app-installation-and-connection)** for the relevant course.
 
 ### 3.5.1 Activation via APP
 
@@ -168,7 +168,7 @@ To understand the connection method for the app, please refer to **[1. ROSpider 
 
 ### 3.5.2 Activation via Commands
 
-1. Start the robot and connect it to the remote control software NoMachine. For details on connecting to the remote desktop, refer to **[1. ROSpider User Manual\1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
+1. Start the robot and connect it to the remote control software NoMachine. For details on connecting to the remote desktop, refer to **[1. ROSpider User Manual\1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
 2. Click the icon <img  src="../_static/media/chapter_3/section_1/media/image7.png"   /> on the system desktop to open the command line terminal.
 3. Enter the command to stop the auto-start service and press **Enter**.
 

@@ -1620,7 +1620,7 @@ There are two ways to start the host computer, which can be selected based on re
 
 * **Start using the desktop icon**
 
-1. Start the hexapod robot and connect it to the remote control software NoMachine. Refer to the contents in the **[1. ROSpider User Manual\1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)** directory for remote connection.
+1. Start the hexapod robot and connect it to the remote control software NoMachine. Refer to the contents in the **[1. ROSpider User Manual\1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)** directory for remote connection.
 2. Double-click the icon <img src="../_static/media/chapter_2/section_1/image18.png" style="width:80px;"/> on the system desktop to open the PC software.
 
 * **Start using the command line**
@@ -1831,7 +1831,7 @@ This lesson will edit an action group to make ROSpider **clap**. This action gro
 
 ### 2.12.1 Action Editing
 
-1. Power on the robot and connect it to the remote control software NoMachine. Refer to the contents in the **[1. ROSpider User Manual\1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)** directory for remote connection.
+1. Power on the robot and connect it to the remote control software NoMachine. Refer to the contents in the **[1. ROSpider User Manual\1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)** directory for remote connection.
 2. Double-click the icon <img src="../_static/media/chapter_2/section_1/image18.png" style="width:80px;"/> on the system desktop to open the PC software.
 3. To facilitate subsequent explanations, the legs of ROSpider are sorted as shown in the figure below:
 
@@ -1983,13 +1983,13 @@ All numerical parameters of this action group are shown in the table below:
 ## 2.13 App Custom Control
 
 Previously, the editing method of the action group **clap** was introduced. This section will use the custom action group function of the app to make the ROSpider execute this action group.
-To learn about the connection method of the app, refer to the related sections in directory **[1. ROSpider User Manual\1.3 Basic Robot Usage\1.3.3 App Installation and Connection](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/1_ROSpider_User_Manual.html#app-installation-and-connection)**.
+To learn about the connection method of the app, refer to the related sections in directory **[1. ROSpider User Manual\1.3 Basic Robot Usage\1.3.3 App Installation and Connection](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/1_ROSpider_User_Manual.html#app-installation-and-connection)**.
 
 <p id ="p2-13-1"></p>
 
 ### 2.13.1 View Built-in Action Groups
 
-1. Power on the robot and connect it to the remote control software NoMachine. Refer to the contents in the **[1. ROSpider User Manual\1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)** directory for remote connection.
+1. Power on the robot and connect it to the remote control software NoMachine. Refer to the contents in the **[1. ROSpider User Manual\1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)** directory for remote connection.
 2. Click the icon <img src="../_static/media/chapter_2/section_1/image89.png" style="width:60px;"/> in the system status bar to open the file manager.
 3. Navigate to the directory **/home/ubuntu/software/actionset_editor/ActionGroups** to view the names of all current action groups.
 

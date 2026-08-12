@@ -90,7 +90,7 @@ The first-person perspective utilizes the robot's own viewpoint to complete colo
 >
 > **Commands are strictly case-sensitive, and the Tab key can be used to auto-complete keywords.**
 
-1. Power on ROSpider and connect it to the remote control software NoMachine. For instructions on connecting to the remote desktop, refer to **[1. ROSpider User Manual \ 1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
+1. Power on ROSpider and connect it to the remote control software NoMachine. For instructions on connecting to the remote desktop, refer to **[1. ROSpider User Manual \1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
 
 2. Click the desktop icon <img src="../_static/media/chapter_6/section_1/image1.png"  style="width:60px;"/> to open the terminal.
 
@@ -288,7 +288,7 @@ First, the program utilizes OpenCV for color recognition and image processing. U
 > [!NOTE]
 > **Commands are strictly case-sensitive, and the Tab key can be used to auto-complete keywords.**
 
-1. Power on ROSpider and connect it to the remote control software NoMachine. For instructions on connecting to the remote desktop, refer to **[1. ROSpider User Manual \ 1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
+1. Power on ROSpider and connect it to the remote control software NoMachine. For instructions on connecting to the remote desktop, refer to **[1. ROSpider User Manual \1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
 2. Click the desktop icon <img src="../_static/media/chapter_6/section_1/image1.png" style="width:60px;"/> to open the terminal.
 3. Enter the command to stop auto-start services.
 
@@ -795,7 +795,7 @@ During navigation, mobile robots may encounter hazards such as downward steps or
 > [!NOTE]
 > **Commands are strictly case-sensitive, and the Tab key can be used to auto-complete keywords.**
 
-1. Power on ROSpider and connect it to the remote control software NoMachine. For instructions on connecting to the remote desktop, refer to **[1. ROSpider User Manual \ 1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
+1. Power on ROSpider and connect it to the remote control software NoMachine. For instructions on connecting to the remote desktop, refer to **[1. ROSpider User Manual \1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
 2. Click the desktop icon <img src="../_static/media/chapter_6/section_1/image1.png"  style="width:60px;"/> to open the terminal.
 3. Enter the command to stop auto-start services.
 
@@ -975,7 +975,7 @@ Crossing a narrow bridge involves multiple technical aspects, primarily balance 
 > [!NOTE]
 > **Commands are strictly case-sensitive, and the Tab key can be used to auto-complete keywords.**
 
-1. Power on ROSpider and connect it to the remote control software NoMachine. For instructions on connecting to the remote desktop, refer to **[1. ROSpider User Manual \ 1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
+1. Power on ROSpider and connect it to the remote control software NoMachine. For instructions on connecting to the remote desktop, refer to **[1. ROSpider User Manual \1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
 2. Click the desktop icon <img src="../_static/media/chapter_6/section_1/image1.png"  style="width:60px;"/> to open the terminal.
 3. Enter the command to stop auto-start services.
 
@@ -1179,7 +1179,7 @@ By integrating depth vision and robot control technologies, the system identifie
 > [!NOTE]
 > **Commands are strictly case-sensitive, and the Tab key can be used to auto-complete keywords.**
 
-1. Power on ROSpider and connect it to the remote control software NoMachine. For instructions on connecting to the remote desktop, refer to **[1. ROSpider User Manual \ 1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
+1. Power on ROSpider and connect it to the remote control software NoMachine. For instructions on connecting to the remote desktop, refer to **[1. ROSpider User Manual \1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
 2. Click the desktop icon <img src="../_static/media/chapter_6/section_1/image1.png" style="width:60px;"/> to open the terminal.
 3. Enter the command to stop auto-start services.
 
@@ -1461,7 +1461,7 @@ Furthermore, object classification has numerous other industrial applications, i
 > * **Before running this feature, the robot's overall deviation must be adjusted according to  [8.1 Servo Deviation Calibration](#p8-1). Otherwise, the performance of subsequent applications will be negatively affected.**
 >
 
-1. Power on ROSpider and connect it to the remote control software NoMachine. For instructions on connecting to the remote desktop, refer to **[1. ROSpider User Manual \ 1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
+1. Power on ROSpider and connect it to the remote control software NoMachine. For instructions on connecting to the remote desktop, refer to **[1. ROSpider User Manual \1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
 2. Click the desktop icon <img src="../_static/media/chapter_6/section_1/image1.png" style="width:60px;"/> to open the terminal.
 3. Enter the command to stop auto-start services.
 
@@ -1742,7 +1742,7 @@ This application implements a depth map-based object recognition and volume calc
 > * **Before running this feature, the robot's overall deviation must be adjusted according to  [8.1 Servo Deviation Calibration](#p8-1). Otherwise, the performance of subsequent applications will be negatively affected.**
 >
 
-1. Power on ROSpider and connect it to the remote control software NoMachine. For instructions on connecting to the remote desktop, refer to **[1. ROSpider User Manual \ 1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
+1. Power on ROSpider and connect it to the remote control software NoMachine. For instructions on connecting to the remote desktop, refer to **[1. ROSpider User Manual \1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
 2. Click the desktop icon <img src="../_static/media/chapter_6/section_1/image1.png" style="width:60px;"/> to open the terminal.
 3. Enter the command to stop auto-start services.
 

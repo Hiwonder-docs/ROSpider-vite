@@ -3599,8 +3599,11 @@ Before enabling the function, a map needs to be established first. Refer to [5. 
 #### 11.3.5.3 Operation Steps
 
 > [!NOTE]
-> **Command inputs must strictly distinguish between uppercase and lowercase letters and spaces.**
-> **Ensure the robot is connected to a network. Configure it to STA local area network mode, or use AP direct connection mode with an Ethernet cable.**
+>
+> * **Command inputs must strictly distinguish between uppercase and lowercase letters and spaces.**
+>
+> * **Ensure the robot is connected to a network. Configure it to STA local area network mode, or use AP direct connection mode with an Ethernet cable.**
+> * **Since Jetson Nano has limited processing performance, severe interface lag may occur when RViz is opened on the robot system. In this case, RViz can be run in a virtual machine to assist with navigation.**
 
 1. Click the icon <img src="../_static/media/chapter_11/section_3/media/image47.png"  /> on the left side of the system interface to open a command-line terminal. Enter the command, and press **Enter** to stop the auto-start service.
 
@@ -3614,7 +3617,12 @@ Before enabling the function, a map needs to be established first. Refer to [5. 
 ros2 launch large_models_examples vllm_navigation.launch.py map:=map_01
 ```
 
-3. After opening the `rviz` map, click the **2D Pose Estimate** icon to set the initial position of the robot.
+3. Refer to **[5. Mapping and Navigation Course]()** to configure the robot and the virtual machine on the same LAN. After opening the map in `RViz` from the virtual machine terminal, click the `2D Pose Estimate` icon to set the robot's initial position.
+
+```bash
+rviz -d ~/ros2_ws/src/navigation/rviz/navigation_transport.rviz 
+```
+
 4. When the command line displays the following output and announces **I'm ready**, it indicates that the voice device has completed initialization. Then, say the wake word **Hello Hiwonder** to awaken it.
 
 <img class="common_img" src="../_static/media/chapter_11/section_3/media/image53.png"  />
@@ -4060,13 +4068,17 @@ ros2 launch large_models_examples automatic_pick.launch.py debug:=place
 
 * **Navigation Map Construction**
 
-Before enabling the function, a map needs to be established first by referring to [5. Mapping and Navigation Course / 5.1 Mapping Tutorial](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/5_Mapping_and_Navigation_Course.html#mapping-tutorial).
+Before enabling the function, a map needs to be established first by referring to [5. Mapping and Navigation Course / 5.2 Mapping Tutorial](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/5_Mapping_and_Navigation_Course.html#mapping-tutorial).
 
 #### 11.3.6.3 Operation Steps
 
 > [!NOTE]
-> **Command inputs must strictly distinguish between uppercase and lowercase letters and spaces.**
-> **Ensure the robot is connected to a network. Configure it to STA local area network mode, or use AP direct connection mode with an Ethernet cable.**
+>
+> * **Command inputs must strictly distinguish between uppercase and lowercase letters and spaces.**
+>
+> * **Ensure the robot is connected to a network. Configure it to STA local area network mode, or use AP direct connection mode with an Ethernet cable.**
+>
+> * **Since Jetson Nano has limited processing performance, severe interface lag may occur when RViz is opened on the robot system. In this case, RViz can be run in a virtual machine to assist with navigation.**
 
 1. Click the icon <img  src="../_static/media/chapter_11/section_3/media/image39.png"  /> on the left side of the system interface to start the command-line terminal. Enter the command and press **Enter** to stop the auto-start service.
 
@@ -4074,14 +4086,19 @@ Before enabling the function, a map needs to be established first by referring t
 ~/.stop_ros.sh
 ```
 
-2. If a map is not yet available, refer to [5. Mapping and Navigation Course / 5.1 Mapping Tutorial](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/5_Mapping_and_Navigation_Course.html#mapping-tutorial) to build a map first.
+2. If a map is not yet available, refer to [5. Mapping and Navigation Course / 5.2 Mapping Tutorial](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/5_Mapping_and_Navigation_Course.html#mapping-tutorial) to build a map first.
 3. Enter the command and press **Enter** to run the intelligent transport feature.
 
 ```bash
 ros2 launch large_models_examples vllm_navigation_transport.launch.py map:=map_01
 ```
 
-4. After opening the `rviz` map, click the **2D Pose Estimate** icon to set the initial position of the robot.
+4. Refer to **[5. Mapping and Navigation Course]()** to configure the robot and the virtual machine on the same LAN. After opening the map in `RViz` from the virtual machine terminal, click the `2D Pose Estimate` icon to set the robot's initial position.
+
+```bash
+rviz -d ~/ros2_ws/src/navigation/rviz/navigation_transport.rviz 
+```
+
 5. When the command line displays the following output and announces **I'm ready**, it indicates that the voice device has completed initialization. Then, say the wake word **Hello Hiwonder** to awaken it.
 
 <img class="common_img" src="../_static/media/chapter_11/section_3/media/image60.png" />

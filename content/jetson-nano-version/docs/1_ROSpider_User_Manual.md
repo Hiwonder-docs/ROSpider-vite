@@ -187,7 +187,7 @@ Specific camera parameters are shown in the table below:
 </tr>
 <tr>
 <td>Device Power Consumption</td>
-<td>Overall Power Consumption Avg<1.6W</td>
+<td>Overall Power Consumption Avg&lt;1.6W</td>
 </tr>
 <tr>
 <td>Safety</td>
@@ -232,7 +232,7 @@ Specific camera parameters are shown in the table below:
 
 **1.2.3.4 LiDAR**
 
-LiDAR is a sensor that acquires precise location information through laser beams. LiDAR has numerous application scenarios; those related to the robot's functions include radar obstacle avoidance, following, SLAM mapping, and navigation. For courses related to LiDAR, please check the **[LiDAR Course](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/3_LiDAR_Course.html)**.
+LiDAR is a sensor that acquires precise location information through laser beams. LiDAR has numerous application scenarios; those related to the robot's functions include radar obstacle avoidance, following, SLAM mapping, and navigation. For courses related to LiDAR, please check the **[LiDAR Course](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/3_LiDAR_Course.html)**.
 
 This robot can be equipped with the LD19 LiDAR. This radar primarily consists of a laser ranging core, a wireless power transmission unit, a wireless communication unit, an angle measurement unit, a motor drive unit, and a mechanical shell. After power-on, the rotation speed stabilizes to 10±0.1Hz within 3 seconds. It also provides a PWM external input interface to support external speed control. After the external control unit obtains the rotation speed, closed-loop control is performed via the PID algorithm, and a PWM signal is input to make the LD19 reach the specified rotation speed.
 
@@ -249,7 +249,7 @@ The LD19 LiDAR uses a ZH1.5T-4P 1.5mm connector to connect with the external sys
 
 **1.2.3.5 6-Microphone Array Module**
 
-This module is an optional hardware component. It enables voice wake-up and voice control functions on the robot. For courses related to the microphone array module, please refer to **[1. Tutorials\9. Voice Control Course](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/9_Voice_Control_Course.html)**.
+This module is an optional hardware component. It enables voice wake-up and voice control functions on the robot. For courses related to the microphone array module, please refer to **[1. Tutorials\9. Voice Control Course](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/9_Voice_Control_Course.html)**.
 
 This robot utilizes a six-channel microphone array adopting a planar distribution structure. It consists of six microphones that sample and process the spatial characteristics of the sound field. It can perform sound source localization and suppress background noise, interference, reverberation, and echo, achieving 360° equivalent audio reception.
 
@@ -275,7 +275,7 @@ WonderEcho Pro, also known as the AI voice interaction box, features a built-in 
 
 It integrates various voice processing technology modules and employs advanced noise suppression algorithms to effectively filter background noise from the environment, supporting a complete workflow from wake-up to voice recognition and interaction. The interaction box utilizes a modular design, allowing each functional component, such as wake-up, detection, recognition, and synthesis, to be developed and tested independently.
 
-For more information, please consult the **[1. Tutorials\9. Voice Control Course](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/9_Voice_Control_Course.html)** document content.
+For more information, please consult the **[1. Tutorials\9. Voice Control Course](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/9_Voice_Control_Course.html)** document content.
 
 **1.2.3.7 Bus Servo**
 
@@ -1116,7 +1116,7 @@ Once mapping is completed, the corresponding map will be saved. Subsequently, th
 
 The manual mapping algorithm used is slam_toolbox. The SLAM Toolbox package forms a 2D map of space based on LaserScan messages combined with information from the laser rangefinder and TF transformations from odom-> base link. This package permits fully serialized reloading of the SLAM map's data and pose graph for continuous mapping, localization, merging, or other operations. The SLAM Toolbox can run in synchronous and asynchronous modes. In synchronous mode, it processes all valid sensor measurements irrespective of lag, while in asynchronous mode, it processes valid sensor measurements when possible.
 
-For more principles on mapping algorithms, enabling mapping and navigation via commands, and how to save multiple maps, please review **[1. Tutorials\5. Mapping and Navigation Course\5.1 Mapping Tutorial](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/5_Mapping_and_Navigation_Course.html#mapping-tutorial)**.
+For more principles on mapping algorithms, enabling mapping and navigation via commands, and how to save multiple maps, please review **[1. Tutorials\5. Mapping and Navigation Course\5.2 Mapping Tutorial](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/5_Mapping_and_Navigation_Course.html#mapping-tutorial)**.
 
 **1.5.1.1 Mapping Preparations**
 
@@ -1208,7 +1208,7 @@ When the **W** or **S** key is pressed, the robot continuously moves forward or 
 
 > [!NOTE]
 > * **Navigation will read the most recently manually or autonomously built map. If both methods were used for mapping simultaneously, the most recently successfully built and saved map will be kept.**
-> * **To learn how to save multiple maps, please study the course [5. Mapping and Navigation Course](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/5_Mapping_and_Navigation_Course.html#mapping-and-navigation-course) later on.**
+> * **To learn how to save multiple maps, please study the course [5. Mapping and Navigation Course](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/5_Mapping_and_Navigation_Course.html#) later on.**
 >
 
 **1.5.2.1 Operation Steps**

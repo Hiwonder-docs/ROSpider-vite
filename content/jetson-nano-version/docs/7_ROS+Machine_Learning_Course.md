@@ -122,71 +122,9 @@ Take deep learning as an example—the neural network systems it relies on are d
 
 Moreover, the GPU architecture does not include dedicated image processing algorithms; instead, it is optimized based on CPU architecture. Therefore, in addition to image processing, GPUs are also widely used in fields such as scientific computing, cryptographic cracking, numerical analysis, big data processing, and financial analysis, where parallel computing is required.
 
-### 7.2.2 TensorRT Acceleration
+### 7.2.2 YOLO26 Model
 
-#### 7.2.2.1 Introduction to TensorRT
-
-TensorRT is a high-performance deep learning inference SDK developed by NVIDIA. It includes a deep learning inference optimizer and runtime that enables low-latency and high-throughput deployment of inference applications.
-
-TensorRT now supports deep learning frameworks such as TensorFlow, Caffe, MXNet, and PyTorch. By integrating TensorRT with NVIDIA GPUs, fast and efficient inference deployment can be achieved across most frameworks.
-
-There are many optimization methods for deep learning models, such as weight quantization, weight sparsity, and channel pruning, which are typically performed during the training phase. In contrast, TensorRT optimizes already-trained models by improving the efficiency of the computational graph.
-
-#### 7.2.2.2 Optimization Methods
-
-<img class="common_img" src="../_static/media/chapter_7/section_2/media/image1.png" style="width:600px" />
-
-TensorRT employs the following optimization strategies:
-
-- Precision Calibration
-
-- Layer \& Tensor Fusion
-
-- Kernel Auto-Tuning
-
-- Dynamic Tenser Memory
-
-- Multi-Stream Execution
-
-- **Precision Calibration for Weights and Activations**
-
-Most deep learning frameworks use 32-bit floating-point (FP32) precision for network tensors during training. After training, because inference does not require backpropagation, data precision can be reduced to formats like FP16 or INT8. Lowering data precision reduces memory usage and latency and shrinks the model size.
-
-The following table shows the dynamic ranges for different precisions:
-
-| **Precision** | **Dynamic Range**     |
-| ------------- | --------------------- |
-| FP32          | −3.4×1038 ~ +3.4×1038 |
-| FP16          | −65504 ~- +65504      |
-| INT8          | −128 ~ +127           |
-
-INT8 has only 256 distinct values. Using INT8 to represent FP32 values may result in information loss and degraded performance. However, TensorRT provides a fully automated calibration process to optimally convert FP32 data to INT8 with minimal performance loss.
-
-- **Layer and Tensor Fusion**
-
-Although CUDA cores compute tensors quickly, significant time can still be spent on kernel launches and input/output tensor read-write operations per layer, which wastes GPU resources and creates memory bandwidth bottlenecks.
-
-TensorRT optimizes model structure by horizontally or vertically merging layers to reduce the total number of layers and the CUDA cores they occupy.
-
-Horizontal fusion combines convolution, bias, and activation into a CBR structure, which occupies only one CUDA core. Vertical fusion merges layers with the same structure but different weights into a wider layer, also using only one CUDA core.
-
-Additionally, for multi-branch merges, TensorRT can direct outputs to the correct memory address without copying, eliminating the concat layer and reducing memory access operations.
-
-- **Kernel Auto-Tuning**
-
-During inference, the network model performs calculations using CUDA kernels on the GPU. TensorRT automatically tunes CUDA kernels based on different algorithms, network models, and GPU platforms to ensure optimal performance on a given platform.
-
-- **Dynamic Tensor Memory**
-
-TensorRT assigns memory to each tensor only during its usage period to avoid redundant memory allocation. This reduces memory usage and improves memory reuse efficiency.
-
-- **Multi-Stream Execution**
-
-By utilizing CUDA streams, TensorRT enables parallel computation across multiple branches of the same input, maximizing parallel operation.
-
-### 7.2.3 YOLO26 Model
-
-#### 7.2.3.1 Overview of the YOLO Models
+#### 7.2.2.1 Overview of the YOLO Models
 
 * **YOLO Series**
 
@@ -216,7 +154,7 @@ YOLO26 is the next-generation real-time object detection model introduced by Ult
 
 **7.** **Performance**: Achieves high precision on benchmarks such as COCO, delivering up to a 43% increase in CPU inference speed compared to previous generations.
 
-#### 7.2.3.2 YOLOv26 Model Structure
+#### 7.2.2.2 YOLOv26 Model Structure
 
 * **Components**
 
@@ -336,23 +274,25 @@ The composite residual convolutional block modifies the composite convolutional 
 
 The output from a convolutional block is simultaneously passed through three separate max pooling layers, while an additional unprocessed copy is preserved. The resulting four feature maps are then concatenated and passed through a convolutional block. By processing data with the composite pooling block, the original features can be significantly enhanced and emphasized.
 
-### 7.2.4 YOLOv26 Workflow
+<img class="common_img" src="../_static/media/chapter_7/section_2/media/image19.png" style="width:600px" />
+
+### 7.2.3 YOLOv26 Workflow
 
 This section explains the model’s processing flow using the concepts of prior boxes, prediction boxes, and anchor boxes involved in YOLOv26.
 
-#### 7.2.4.1 Prior Box
+#### 7.2.3.1 Prior Box
 
 When an image is fed into the model, predefined regions of interest must be specified. These regions are marked using prior boxes, which serve as initial bounding box templates indicating potential object locations in the image.
 
 <img class="common_img" src="../_static/media/chapter_7/section_2/media/image20.png" style="width:600px" />
 
-#### 7.2.4.2 Prediction Box
+#### 7.2.3.2 Prediction Box
 
 Prediction boxes are generated by the model as output and do not require manual input. When the first batch of training data is fed into the model, the prediction boxes are automatically created. The center points of prediction boxes tend to be located in areas where similar objects frequently appear.
 
 <img class="common_img" src="../_static/media/chapter_7/section_2/media/image21.png" style="width:600px" />
 
-#### 7.2.4.3 Anchor Box
+#### 7.2.3.3 Anchor Box
 
 Since predicted boxes may have deviations in size and location, anchor boxes are introduced to correct these predictions.
 
@@ -360,21 +300,23 @@ Anchor boxes are positioned based on the predicted boxes. By influencing the gen
 
 <img class="common_img" src="../_static/media/chapter_7/section_2/media/image22.png" style="width:600px" />
 
-#### 7.2.4.4 Project Process
+#### 7.2.3.4 Project Process
 
 Once the bounding box annotations are complete, prior boxes appear on the image. When the image data is input into the model, predicted boxes are generated based on the locations of the prior boxes. Subsequently, anchor boxes are generated to adjust the predicted results. The weights from this round of training are then updated in the model.
 
 With each new training iteration, the predicted boxes are influenced by the anchor boxes from the previous round. This process is repeated until the predicted boxes gradually align with the prior boxes in both size and location.
 
+<img class="common_img" src="../_static/media/chapter_7/section_2/media/image23.png"  style="width:600px" />
+
 <p id ="anther7.3.5"></p>
 
-### 7.2.5 Image Collection and Annotation
+### 7.2.4 Image Collection and Annotation
 
 Training the YOLOv11 model requires a large amount of data, so data collection and annotation must be performed first to prepare for model training.
 
 In this example, the demonstration uses traffic signs as target objects.
 
-#### 7.2.5.1 Image Collection
+#### 7.2.4.1 Image Collection
 
 1. Power on the robot and connect it via the NoMachine remote control software.
 
@@ -432,7 +374,7 @@ A `JPEGImages` folder will be automatically created under the directory **/home/
 
 11. Then press **Ctrl + C** in all open terminal windows to exit—this completes the image collection process.
 
-#### 7.2.5.2 Image Annotation
+#### 7.2.4.2 Image Annotation
 
 After acquiring images, image annotation is required. Annotation is essential for functional datasets because it informs the training model about the categories of important image sections, enabling the model to accurately recognize these categories in new, unseen images later.
 
@@ -454,6 +396,9 @@ python3 ~/software/roLabelImg/roLabelImg.py
 <img class="common_img" src="../_static/media/chapter_7/section_2/media/image30.png" style="width:600px" />
 
 4. Click **View** in the top left corner and select **Advanced Mode** to enable the rotational annotation feature.
+
+   <img class="common_img" src="../_static/media/chapter_7/section_2/media/image40.png" style="width:600px" />
+
 5. Keyboard shortcuts are utilized as follows: **e** annotates a rotated target, **d** moves to the next image, **a** moves to the previous image, **c** applies a slight clockwise rotation, **x** applies a slight counterclockwise rotation, **v** applies a large clockwise rotation, and **z** applies a large counterclockwise rotation. After annotating each image, press **Ctrl + S** or click the **Save** icon on the left to save the progress.
 
 > [!NOTE]
@@ -468,7 +413,7 @@ python3 ~/software/roLabelImg/roLabelImg.py
 7. Use the shortcut **Ctrl + S** to save the annotation data for the current image.
 8. Press the **D** key to proceed to the next image for annotation. Repeat steps 5-7 until all images are successfully annotated, and then click the close button in the top right corner of the software to exit.
 
-### 7.2.6 Data Format Conversion
+### 7.2.5 Data Format Conversion
 
 1. Click the desktop icon <img src="../_static/media/chapter_7/section_2/media/image24.png"  /> to open a terminal, and enter the command.
 
@@ -489,10 +434,10 @@ vim ~/my_data/classes.names
 4. Return to the terminal, enter the command to convert the data format, and press **Enter**.
 
 ```bash
-python3 ~/third_party/yolo/xml2yolo_obb.py --data ~/my_data --yaml ~/my_data/data.yaml
+python3 ~/third_party_ros2/yolo/xml2yolo_obb.py --data ~/my_data --yaml ~/my_data/data.yaml
 ```
 
-### 7.2.7 Training the Model
+### 7.2.6 Training the Model
 
 > [!NOTE]
 > **Commands are strictly case-sensitive, and the Tab key can be used to auto-complete keywords.**
@@ -500,7 +445,7 @@ python3 ~/third_party/yolo/xml2yolo_obb.py --data ~/my_data --yaml ~/my_data/dat
 1. Enter the command to start training and press **Enter**.
 
 ```bash
-python3 ~/third_party/yolo/train.py --img 640 --weights yolo26n.pt --data /home/ubuntu/my_data/data.yaml --batch 16 --epochs 300
+python3 ~/third_party_ros2/yolo/train.py --img 320 --weights yolo26n.pt --data /home/ubuntu/my_data/data.yaml --batch 4 --epochs 300
 ```
 
 In the command, `img` specifies the image size, `batch` dictates the number of images per input batch, and `epochs` represents the number of training iterations. These parameters can be modified based on actual requirements. To improve model reliability, the number of epochs can be increased. However, this will correspondingly increase the overall training time.
@@ -513,63 +458,39 @@ In the command, `img` specifies the image size, `batch` dictates the number of i
 
 <img class="common_img" src="../_static/media/chapter_7/section_2/media/image36.png" style="width:900px "/>
 
-### 7.2.8 Exporting and Using the engine Model
+### 7.2.7 Exporting and Using the engine Model
 
-1. Using the previously generated training result path as an example, enter the command and press **Enter** to navigate to the directory.
-
-```bash
-cd ~/third_party/yolo/runs/obb/train3/weights
-```
-
-2. Enter the command to move the trained model file to the corresponding path.
+1. Using the previously generated training result path as an example, copy the generated `.pt` file to the folder `~/third_party_ros2/yolo/`. Ensure the specific path matches the local environment setup.
 
 ```bash
-cp best.pt ~/third_party/yolo
+cp ~/runs/detcet/train3/weights/best.pt ~/third_party_ros2/yolo/
 ```
 
-3. Enter the command and press **Enter** to begin exporting the engine file, which takes some time to complete.
+2. Enter the command to open the launch file.
 
 ```bash
-python3 export.py --weights best.pt --include engine --imgsz 640 --device 0
+gedit /home/ubuntu/ros2_ws/src/example/example/yolo_detect/yolo_detect_demo.py
 ```
 
-4. Following the conversion, the `.engine` file will be generated.
+Enter the trained model class name `left` in `CLASSES_NAMES_DEFAULT`, then save the file and exit.
 
-<img class="common_img" src="../_static/media/chapter_7/section_2/media/image37.png" style="width:800px "/>
-
-<img class="common_img" src="../_static/media/chapter_7/section_2/media/image38.png" style="width:800px "/>
-
-5. Copy the generated `.engine` file to the folder `ros2_ws/src/example/example/yolo_detect/models`. Ensure the specific path matches the local environment setup.
-
-```bash
-cp ~/third_party/yolo/best.engine ~/ros2_ws/src/example/example/yolo_detect/models
-```
-
-6. Enter the command to open the launch file.
-
-```bash
-gedit ~/ros2_ws/src/example/example/yolo_detect/yolo_detect.launch.py
-```
-
-Change `model_engine= 'yolo26n.engine'` to `model_engine= 'best.engine'`, then save and exit.
-
-<img class="common_img" src="../_static/media/chapter_7/section_2/media/image39.png" style="width:500px "/>
+<img class="common_img" src="../_static/media/chapter_7/section_2/media/image41.png" style="width:500px "/>
 
 7. Enter the command and press **Enter** to verify the model's recognition performance.
 
 ```bash
-ros2 launch example yolo_detect.launch.launch.py model_name:=best
+ros2 launch example yolo_detect_demo.launch.py model_name:=best
 ```
 
-### 7.2.9 Waste Classification
+### 7.2.8 Waste Classification
 
-#### 7.2.9.1 Experiment Overview
+#### 7.2.8.1 Experiment Overview
 
 First, the program subscribes to the real-time video feed data published by the camera node and converts it into numpy format. Next, the image is input into the YOLO network, where operations such as scaling, transposition, and array expansion are performed to obtain the processing results.
 
 Subsequently, the acquired waste card image coordinates are converted back to the original image coordinates. Based on the recognized waste names, they are categorized according to predefined rules to retrieve the corresponding waste category names. Finally, the targets are enclosed in bounding boxes, displaying the waste names along with their recognition confidence scores.
 
-#### 7.2.9.2 Operation Steps
+#### 7.2.8.2 Operation Steps
 
 > [!NOTE]
 > **Commands are strictly case-sensitive, and the Tab key can be used to auto-complete keywords.**
@@ -590,7 +511,7 @@ ros2 launch example garbage_classification.launch.py
 
 5. To close the application, press **Ctrl + C** in the terminal interface. If it fails to close, retry repeatedly.
 
-#### 7.2.9.3 Program Outcome
+#### 7.2.8.3 Program Outcome
 
 After starting the feature, place a waste card in front of the camera. Once the camera recognizes the waste card, the corresponding name will be displayed on the video feed, and the robotic arm will grab the waste block and place it in a designated location according to its category.
 
@@ -692,7 +613,7 @@ It provides a series of computer vision and machine learning algorithms and tool
 > [!NOTE]
 > **Commands are strictly case-sensitive, and the Tab key can be used to auto-complete keywords.**
 
-1. Power on ROSpider and remotely connect to the system desktop via NoMachine. For instructions on connecting to the remote desktop, refer to **[1. ROSpider User Manual \ 1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
+1. Power on ROSpider and remotely connect to the system desktop via NoMachine. For instructions on connecting to the remote desktop, refer to **[1. ROSpider User Manual \1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
 2. Click the desktop icon <img src="../_static/media/chapter_7/section_3/media/image3.png" /> to open the command line terminal.
 3. Enter the command and press **Enter** to stop auto-start services.
 
@@ -989,7 +910,7 @@ Finally, the recognition results are fed back in the command line terminal and t
 > [!NOTE]
 > **Commands are strictly case-sensitive, and the Tab key can be used to auto-complete keywords.**
 
-1. Power on ROSpider and remotely connect to the system desktop via NoMachine. For instructions on connecting to the remote desktop, refer to **[1. ROSpider User Manual \ 1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
+1. Power on ROSpider and remotely connect to the system desktop via NoMachine. For instructions on connecting to the remote desktop, refer to **[1. ROSpider User Manual \1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
 2. Click the desktop icon <img src="../_static/media/chapter_7/section_3/media/image3.png" /> to open the command line terminal.
 3. Enter the command and press **Enter** to stop auto-start services.
 
@@ -1124,7 +1045,7 @@ This section utilizes the computer vision library OpenCV to acquire incoming ima
 > [!NOTE]
 > **Commands are strictly case-sensitive, and the Tab key can be used to auto-complete keywords.**
 
-1. Power on ROSpider and remotely connect to the system desktop via NoMachine. For instructions on connecting to the remote desktop, refer to **[1. ROSpider User Manual \ 1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
+1. Power on ROSpider and remotely connect to the system desktop via NoMachine. For instructions on connecting to the remote desktop, refer to **[1. ROSpider User Manual \1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
 2. Click the desktop icon <img src="../_static/media/chapter_7/section_3/media/image3.png" /> to open the command line terminal.
 3. Enter the command and press **Enter** to stop auto-start services.
 
@@ -1476,7 +1397,7 @@ Finally, ROSpider is controlled to track the face based on the distance between 
 > [!NOTE]
 > **Commands are strictly case-sensitive, and the Tab key can be used to auto-complete keywords.**
 
-1. Power on ROSpider and remotely connect to the system desktop via NoMachine. For instructions on connecting to the remote desktop, refer to **[1. ROSpider User Manual \ 1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
+1. Power on ROSpider and remotely connect to the system desktop via NoMachine. For instructions on connecting to the remote desktop, refer to **[1. ROSpider User Manual \1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
 2. Click the desktop icon <img src="../_static/media/chapter_7/section_3/media/image3.png" /> to open the command line terminal.
 3. Enter the command and press **Enter** to stop auto-start services.
 
@@ -1695,7 +1616,7 @@ Finally, when both arms are raised high, the system prepares to enter imitation 
 > [!NOTE]
 > **Commands are strictly case-sensitive, and the Tab key can be used to auto-complete keywords.**
 
-1. Power on ROSpider and remotely connect to the system desktop via NoMachine. For instructions on connecting to the remote desktop, refer to **[1. ROSpider User Manual \ 1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
+1. Power on ROSpider and remotely connect to the system desktop via NoMachine. For instructions on connecting to the remote desktop, refer to **[1. ROSpider User Manual \1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
 2. Click the desktop icon <img src="../_static/media/chapter_7/section_3/media/image3.png" /> to open the command line terminal.
 3. Enter the command and press **Enter** to stop auto-start services.
 

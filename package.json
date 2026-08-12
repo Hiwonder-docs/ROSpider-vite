@@ -3,12 +3,14 @@
     "docs:dev": "vitepress dev docs",
     "dev:jetson-orin-nano-version": "node scripts/dev_version.mjs jetson-orin-nano-version",
     "dev:jetson-nano-version": "node scripts/dev_version.mjs jetson-nano-version",
+    "dev:raspberry-pi-version": "node scripts/dev_version.mjs raspberry-pi-version",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
     "docs:stage-main": "node scripts/stage_main_site.mjs",
     "build:jetson-orin-nano-version": "node scripts/build_version.mjs jetson-orin-nano-version",
     "build:jetson-nano-version": "node scripts/build_version.mjs jetson-nano-version",
-    "build:all": "node scripts/build_version.mjs jetson-orin-nano-version && node scripts/build_version.mjs jetson-nano-version"
+    "build:raspberry-pi-version": "node scripts/build_version.mjs raspberry-pi-version",
+    "build:all": "node scripts/build_version.mjs jetson-orin-nano-version && node scripts/build_version.mjs jetson-nano-version && node scripts/build_version.mjs raspberry-pi-version"
   },
   "dependencies": {
     "vitepress": "^1.6.4"

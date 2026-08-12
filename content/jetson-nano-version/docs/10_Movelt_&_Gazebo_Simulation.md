@@ -33,6 +33,26 @@ A virtual machine is software that allows one operating system to run another op
 
 4. When starting the virtual machine for the first time, enter the product key and click **Continue**.
 
+- **Starting VMware Services on Local Computer**
+
+1. Switch to the local computer and press **WIN+R** to open the **Run** dialog. Type **control** and press **Enter** to open the Control Panel.
+
+<img class="common_img" src="..\_static\media\chapter_10\section_1\media\image9.png"  />
+
+2. Click **Administrative Tools**, then double-click **Services**.
+
+<img class="common_img" src="..\_static\media\chapter_10\section_1\media\image10.png" style="width:800px" />
+
+<img class="common_img" src="..\_static\media\chapter_10\section_1\media\image11.png"  />
+
+3. Find the VMware-related services as shown below.
+
+<img class="common_img" src="..\_static\media\chapter_10\section_1\media\image12.png" style="width:800px" />
+
+4. Right-click and select **Start** to enable all VMware-related services.
+
+<img class="common_img" src="../_static/media/chapter_10/section_1/media/image13.png" style="width:800px" />
+
 ### 10.1.2 Virtual System Image Import
 
 1. In the software interface, click on **Open a Virtual Machine**.
@@ -85,7 +105,7 @@ The virtual machine interface is as follows:
 
 3. Locate the compressed **simulations** file and the `.typerc` file in the directory [Resources \\ 3. Feature Package](https://drive.google.com/drive/folders/14vpqxGBRmrJOEMnqXS1iwp8ipDndMqwE?usp=sharing). Drag the compressed file into the **Home** directory of the virtual machine.
 
-4. Right-click in the **Home** directory and select **Open in terminal** to open the terminal.
+4. Right-click in the **Home** directory and select **Open in terminal** to open the terminal. If the **.typerc** file was already imported during mapping and navigation setup, this step can be skipped.
 
 <img class="common_img" src="../_static/media/chapter_10/section_2/media/image4.png" style="width:600px"/>
 
@@ -165,7 +185,7 @@ In this case, the virtual machine and the robot are both on the 192.168.11 netwo
 
 Common connection methods:
 
-* Connection via router (Recommended): Connect the computer and the Jetson motherboard to the same router using a network cable.
+* Connection via router (Recommended): Connect the computer and the Jetson controller to the same router using a network cable.
 * Connection via Local Area Network (Recommended): Configure the STA Local Area Network according to the tutorial, then connect the robot and the computer to the same WiFi or mobile phone hotspot.
 * Connection via direct link (Not recommended): Set the robot to AP mode for direct connection, then connect the computer to the robot's WiFi.
 

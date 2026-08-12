@@ -1,8 +1,181 @@
 # 5. Mapping and Navigation Course
 
-## 5.1 Mapping Tutorial
+## **5.1 Preparation**
 
-### 5.1.1 Principles of SLAM Map Construction
+Jetson Nano has limited processing performance. If the robot system becomes severely laggy when RViz is opened, RViz can be run in a virtual machine to assist with mapping and navigation.
+
+### **5.1.1 Installing and Importing the Virtual Machine**
+
+Refer to **[10. Movelt & Gazebo Simulation/10.1 Virtual Machine Installation and Import](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/10_Movelt_%26_Gazebo_Simulation.html#virtual-machine-installation-and-import)** to install the virtual machine and import the image.
+
+### **5.2.2 Copying Files to Virtual Machine**
+
+#### **5.2.2.1 Exporting Files from the Robot**
+
+1. Power on the robot and connect it to the NoMachine remote desktop software.
+
+2. Click the icon <img src="..\_static\media\chapter_5\section_1\media\image12.png" /> on the system desktop to open the ROS2 command-line terminal.
+
+3. Then enter the following command to go to the **ros2_ws/src/** directory:
+
+   ```bash
+   cd ros2_ws/src/
+   ```
+
+4. Enter the following command to package the **navigation** and **slam** folders into a compressed file:
+
+   ```bash
+   zip -r src.zip navigation slam
+   ```
+
+5. Enter the following command to move the compressed file to the shared directory:
+
+   ```bash
+   mv src.zip /home/ubuntu/share/tmp
+   ```
+
+6. Enter the following command to return to the **ros2_ws** directory:
+
+   ```bash
+   cd ..
+   ```
+
+7. Enter the following command to view the **.typerc** file in this directory:
+
+   ```bash
+   ls -a
+   ```
+
+8. Enter the following command to copy the **.typerc** file to the shared directory:
+
+   ```bash
+   cp .typerc /home/ubuntu/share/tmp
+   ```
+
+9. Click the icon <img src="..\_static\media\chapter_5\section_1\media\image19.png" /> on the system desktop to open the file manager, then go to the **home/docker/tmp** directory.
+
+<img class="common_img" src="..\_static\media\chapter_5\section_1\media\image20.png" />
+
+10. Press **Ctrl + H** to show the hidden **.typerc** file.
+
+<img class="common_img" src="..\_static\media\chapter_5\section_1\media\image21.png" />
+
+11. Drag the two files in this directory to the computer desktop.
+
+<img class="common_img" src="..\_static\media\chapter_5\section_1\media\image22.png" />
+
+#### 5.2.2.2 Importing Files into Virtual Machine
+
+1. Click the icon <img src="..\_static\media\chapter_5\section_1\media\image23.png" /> on the system desktop. The **home** directory opens by default.
+
+<img class="common_img" src="..\_static\media\chapter_5\section_1\media\image24.png" />
+
+2. Drag the **.typerc** and **src.zip** files from the computer desktop into the virtual machine.
+
+<img class="common_img" src="..\_static\media\chapter_5\section_1\media\image25.png" />
+
+#### 5.2.2.3 Creating and Compiling the Workspace
+
+1. Click the icon <img src="..\_static\media\chapter_5\section_1\media\image26.png" /> on the system desktop to open the virtual machine command-line terminal.
+
+2. Enter the following command to create the **ros2_ws/src** directory:
+
+   ```bash
+   mkdir -p ros2_ws/src
+   ```
+
+3. Extract **src.zip** to the current **/home/ubuntu** directory:
+
+   ```bash
+   unzip src.zip
+   ```
+
+4. Move the **slam** and **navigation** folders to the **ros2_ws/src** directory:
+
+   ```bash
+   mv slam navigation /home/ubuntu/ros2_ws/src/
+   ```
+
+5. Move the **.typerc** file to the **ros2_ws** directory:
+
+   ```bash
+   mv .typerc ros2_ws/
+   ```
+
+6. Navigate to the **ros2_ws** directory:
+
+   ```bash
+   cd ros2_ws/
+   ```
+
+7. Enter the following command to compile the workspace:
+
+   ```bash
+   colcon build
+   ```
+
+8. Modify the **.bashrc** file with the following command:
+
+   ```bash
+   gedit ~/.bashrc
+   ```
+
+   Copy the following content into the **.bashrc** file:
+
+   ```bash
+   source /home/ubuntu/ros2_ws/.typerc
+   source /home/ubuntu/ros2_ws/install/setup.bash
+   ```
+
+9. After editing is complete, press **Ctrl + S** or click the **Save** button in the upper-right corner to save and exit.
+
+<img class="common_img" src="..\_static\media\chapter_5\section_1\media\image27.png" />
+
+10. Enter the following command to refresh the environment configuration:
+
+   ```bash
+source ~/.bashrc
+   ```
+
+<img class="common_img" src="..\_static\media\chapter_5\section_1\media\image28.png" />
+
+#### **5.2.2.4 Setting the Robot to LAN Mode**
+
+1. Click the icon <img src="..\_static\media\chapter_5\section_1\media\image12.png" /> on the system desktop to open the ROS2 command-line terminal.
+
+2. Enter the following command to modify the Wi-Fi configuration file, switch the robot to LAN mode, and update the Wi-Fi name and password:
+
+   ```bash
+   cd wifi_manager && gedit wifi_conf.py
+   ```
+
+3. Change the configuration to LAN mode, then enter the Wi-Fi name and password. A Wi-Fi router or mobile hotspot is required for later connection.
+
+<img class="common_img" src="..\_static\media\chapter_5\section_1\media\image29.png" />
+
+4. Press **Ctrl + S** to save the file and close it.
+
+5. For later connection, make sure the device and the virtual machine are on the same subnet. Enter the following command in the terminal to check:
+
+```bash
+ifconfig
+```
+
+<img class="common_img" src="..\_static\media\chapter_5\section_1\media\image30.png" />
+
+Here, the virtual machine and the robot are both on the `192.168.11` subnet, so communication works properly.
+
+- Common connection methods:
+
+1. **Router connection:** Connect the computer and the Jetson controller board to the same router with Ethernet cables. **Recommended**
+2. **LAN connection:** Configure STA LAN mode as described in the tutorial, then connect the robot and the computer to the same Wi-Fi network or mobile hotspot. **Recommended**
+3. **Direct connection:** Set the robot to AP mode, then connect the computer to the robot's Wi-Fi network. **Not recommended**
+
+
+
+## 5.2 Mapping Tutorial
+
+### 5.2.1 Principles of SLAM Map Construction
 
 * **Introduction to SLAM**
 
@@ -48,7 +221,7 @@ Finally, after the map construction is completed, the following criteria can be 
 4. Whether there are obstacles in the map that will not exist during subsequent localization, e.g., dynamic obstacles.
 5. Whether it can be guaranteed that any position within the robot's active area has been fully explored within a 360-degree field of view.
 
-### 5.1.2 slam_toolbox Mapping Algorithm
+### 5.2.2 slam_toolbox Mapping Algorithm
 
 * **Algorithm Concepts**
 
@@ -102,7 +275,7 @@ As can be seen from the above figure, the process is quite straightforward. In t
 ros2 launch slam slam.launch.py
 ```
 
-4. Open a new command line terminal and enter the command to launch the rviz tool to display the mapping effect:
+4. In the virtual machine, click the icon <img src="../_static/media/chapter_5/section_1/media/image26.png" /> on the system desktop to open the command-line terminal, then enter the command to launch RViz.
 
 ```bash
 ros2 launch slam rviz_slam.launch.py
@@ -110,7 +283,7 @@ ros2 launch slam rviz_slam.launch.py
 
 <img class="common_img" src="../_static/media/chapter_5/section_1/media/image7.png" style="width:600px" />
 
-5. A wireless controller or keyboard can be used to control the movement of the robot. If keyboard control is selected, a new command line terminal must be opened, the command to start the keyboard control node entered, and the **Enter** key pressed:
+5. A wireless controller or keyboard can be used to control the movement of the robot. If keyboard control is selected, open a new command-line terminal on the robot, enter the command to start the keyboard control node, and press **Enter**:
 
 ```bash
 ros2 launch peripherals teleop_key_control.launch.py
@@ -148,7 +321,7 @@ When controlling the robot's movement for mapping via the keyboard, the robot's 
 
 * **Saving the Map**
 
-Open a new command line terminal, enter the command to save the map, and press **Enter**:
+Open a new command-line terminal on the robot, enter the command to save the map, and press **Enter**:
 
 ```bash
 cd ~/ros2_ws/src/slam/maps && ros2 run nav2_map_server map_saver_cli -f "map_01" --ros-args -p map_subscribe_transient_local:=true
@@ -238,9 +411,9 @@ if slam_method == 'slam_toolbox':
 
 `base_launch` is the hardware launch file required to start the program, `slam_launch` is the mapping launch file, and `bringup_launch` is the initial pose launch file.
 
-<p id ="anther5.1.3"></p>
+<p id ="anther5.2.3"></p>
 
-### 5.1.3 RTAB-VSLAM 3D Mapping
+### 5.2.3 RTAB-VSLAM 3D Mapping
 
 * **Introduction to RTAB-VSLAM**
 
@@ -272,7 +445,7 @@ When the RTAB-VSLAM algorithm runs, it first uses STM data to update the localiz
 ros2 launch slam rtabmap_slam.launch.py
 ```
 
-3. Open a new command line terminal and enter the command to launch the rviz tool to display the mapping effect:
+3. In the virtual machine, click the icon <img src="../_static/media/chapter_5/section_1/media/image26.png" /> on the system desktop to open the command-line terminal, then enter the command to launch RViz.
 
 ```bash
 ros2 launch slam rviz_rtabmap.launch.py
@@ -280,7 +453,7 @@ ros2 launch slam rviz_rtabmap.launch.py
 
 <img class="common_img" src="../_static/media/chapter_5/section_1/media/image16.png" style="width:600px" />
 
-4. A wireless controller or keyboard can be used to control the movement of the robot. If keyboard control is selected, a new command-line terminal must be opened. Then enter the command to start the keyboard control node and press **Enter**:
+4. A wireless controller or keyboard can be used to control the movement of the robot. If keyboard control is selected, open a new command-line terminal on the robot, enter the command to start the keyboard control node, and press **Enter**:
 
 ```bash
 ros2 launch peripherals teleop_key_control.launch.py
@@ -392,9 +565,9 @@ bringup_launch = GroupAction(
 
 `base_launch` is the hardware launch file required to start the program, `rtabmap_launch` is the rtab mapping launch file, and `bringup_launch` is the initial pose launch file.
 
-## 5.2 Navigation Tutorial
+## 5.3 Navigation Tutorial
 
-### 5.2.1 ROS Autonomous Navigation
+### 5.3.1 ROS Autonomous Navigation
 
 * **Overview**
 
@@ -497,7 +670,7 @@ Another method involves downloading the source code of the feature package and c
 
 Navigation Function wiki link: [https://wiki.ros.org/Robots/Nav2](https://wiki.ros.org/Robots/Nav2).
 
-### 5.2.2 AMCL Adaptive Monte Carlo Localization
+### 5.3.2 AMCL Adaptive Monte Carlo Localization
 
 * **AMCL Localization**
 
@@ -571,7 +744,7 @@ The `CostmapLayer` class simultaneously inherits from the `Layer` class and `Cos
 
 Costmap obstacle metric scaling is very flexible. Specific layers can be created according to requirements, and obstacle information of concern is then maintained on that layer. If only a LiDAR is installed on the robot, an Obstacles layer needs to be created to maintain the obstacle information scanned by the LiDAR. If an ultrasonic sensor is added to the robot, a Sonar layer needs to be created to maintain the obstacle information scanned by the acoustic sensor. Each layer can possess its own obstacle update rules, such as adding obstacles, deleting obstacles, updating confidence levels of obstacle points, etc., significantly increasing the extensibility of the navigation system.
 
-### 5.2.3 Global Path Planning
+### 5.3.3 Global Path Planning
 
 Based on the degree of understanding of the environment by the mobile robot, environmental properties, and utilized algorithms, path planning can be divided into environment-based path planning algorithms, map-knowledge-based path planning algorithms, and completeness-based path planning algorithms.
 
@@ -635,7 +808,7 @@ For an introduction and instructions on how to use the A* algorithm, please refe
 
 redblobgames website: [https://www.redblobgames.com/pathfinding/a-star/introduction.html#graphs](https://www.redblobgames.com/pathfinding/a-star/introduction.html#graphs).
 
-### 5.2.4 Local Path Planning
+### 5.3.4 Local Path Planning
 
 Global path planning takes starting and target points as inputs and utilizes the obstacle information described by the global map to plan a global path from start to target. A global path is formed by connecting discrete path points sequentially. Because it only considers static obstacle information, the global path cannot be used directly for navigation control, but can only serve as a macroscopic reference for navigation.
 
@@ -806,7 +979,7 @@ Wiki official website: [http://wiki.ros.org/teb_local_planner](http://wiki.ros.o
 
 These materials are beneficial for more deeply studying the TEB algorithm and areas related to path planning.
 
-### 5.2.4 LiDAR Single-Point, Multi-Point Navigation, and Obstacle Avoidance
+### 5.3.5 LiDAR Single-Point, Multi-Point Navigation, and Obstacle Avoidance
 
 1. Click the icon <img src="../_static/media/chapter_5/section_2/media/image28.png"  /> on the system desktop to open the command line terminal. Enter the command to disable the app auto-start service:
 
@@ -822,7 +995,7 @@ ros2 launch navigation navigation.launch.py map:=map_01
 
 The **map_01** at the end of the command is the map name, which can be modified based on specific requirements. The storage path for maps is **/home/ubuntu/ros2_ws/src/slam/maps**.
 
-3. Open a new command line terminal and enter the command to start the rviz tool to display navigation:
+3. In the virtual machine, click the icon <img src="../_static/media/chapter_5/section_1/media/image26.png" /> on the system desktop to open the command-line terminal, then enter the command to launch RViz.
 
 ```bash
 ros2 launch navigation rviz_navigation.launch.py
@@ -942,15 +1115,15 @@ bringup_launch = GroupAction(
 
 `base_launch` is used to launch the hardware, `navigation_launch` initiates the navigation algorithms, and `bringup_launch` serves as an initialization action.
 
-### 5.2.5 RTAB-VSLAM 3D Navigation
+### 5.3.6 RTAB-VSLAM 3D Navigation
 
 * **Algorithm Introduction and Principles**
 
-For an introduction and principles of the RTAB-VSLAM algorithm, refer to [5.1.3 RTAB-VSLAM 3D Mapping](#anther5.1.3) for more details.
+For an introduction and principles of the RTAB-VSLAM algorithm, refer to [5.2.3 RTAB-VSLAM 3D Mapping](#anther5.2.3) for more details.
 
 * **Operating Steps**
 
-1. Power on the robot and connect it to the remote control software NoMachine. For details on how to connect to the remote desktop, refer to section **[1. ROSpider User Manual -> 1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-orin-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
+1. Power on the robot and connect it to the remote control software NoMachine. For details on how to connect to the remote desktop, refer to section **[1. ROSpider User Manual -> 1.4 Development Environment Setup](https://wiki.hiwonder.com/projects/ROSpider/en/jetson-nano-version/docs/1_ROSpider_User_Manual.html#development-environment-setup)**.
 2. Click the icon <img src="../_static/media/chapter_5/section_2/media/image45.png"  /> on the system desktop to open the command line terminal. Enter the command to disable the app auto-start service:
 
 ```bash
@@ -963,7 +1136,7 @@ For an introduction and principles of the RTAB-VSLAM algorithm, refer to [5.1.3 
 ros2 launch navigation rtabmap_navigation.launch.py
 ```
 
-4. Open a new command-line terminal and enter the command to start the rviz tool to display navigation:
+4. In the virtual machine, click the icon <img src="../_static/media/chapter_5/section_1/media/image26.png" /> on the system desktop to open the command-line terminal, then enter the command to launch RViz.
 
 ```bash
 ros2 launch navigation rviz_rtabmap_navigation.launch.py

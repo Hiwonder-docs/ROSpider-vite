@@ -187,7 +187,7 @@ Specific camera parameters are shown in the table below:
 </tr>
 <tr>
 <td>Device Power Consumption</td>
-<td>Overall Power Consumption Avg<1.6W</td>
+<td>Overall Power Consumption Avg&lt;1.6W</td>
 </tr>
 <tr>
 <td>Safety</td>
